@@ -14,7 +14,7 @@ int main(int argc,char* argv[]) {
         return 1;
     }
 
-    int fd = open(argv[1],O_RDONLY);
+    int fd = open(argv[1],O_RDONLY); // O_RDONLY表示只读
     // -1 表示导入失败，perror返回原因
     if (fd == -1) {
         perror("open");
@@ -23,16 +23,17 @@ int main(int argc,char* argv[]) {
 
     // 准备缓冲区
     char buf[4096];
-    ssize_t n;
+    ssize_t n; // 有符号整数类型
     // 每次 read 最多读 4096 字节到 buf，返回值 n = 实际读到的字节数
     // n > 0：读到了数据 → 进循环体
     // n == 0：文件读到末尾（EOF）→ 退出循环
     // n == -1：出错 → 退出循环，交给后面处理
     // 为什么循环：文件可能比 4096 大，一次读不完，得反复读。
     while ((n = read(fd,buf,sizeof(buf))) > 0) {
-        ssize_t off = 0;
+        ssize_t off = 0; // off接收偏移量
         while (off < n) {
-            ssize_t w =write(STDOUT_FILENO,buf + off,n - off);
+            ssize_t w =write(STDOUT_FILENO,buf + off,n - off); // 宏表示fd = 1，输出
+            // write函数根据fd来写，此处fd = 1，就是输出到屏幕
             if (w == -1) {
                 perror("write");
                 close(fd);

@@ -1,12 +1,13 @@
 # TinyWebServer 项目 Memory
 
-> 本文件是本项目的持久记忆：进度、知识点笔记、决策、踩坑。每完成一个阶段就更新一次。详细计划见 `PLAN.md`。
+> 本文件是本项目的持久记忆：进度、知识点笔记、决策、踩坑。每完成一个阶段就更新一次。计划见 `PLAN.md`，开发日志见 `Development Log.md`。
 
 ## 项目信息
 
 - 目标：Linux 下 C++ 轻量级 Web 服务器（核心版，对照重写）
 - 范围：线程池 + epoll + HTTP GET/POST + 定时器 + 日志（**不含 MySQL**）
 - 环境：WSL2 + Ubuntu · `g++ -std=c++11` · CMake · CLion（WSL 工具链）
+- GitHub：github.com/Seren1ty23/tinywebserver（SSH 已配通，分支 main）
 - 蓝本：https://github.com/qinguoyi/TinyWebServer
 - 方式：对照重写（只看不抄，每阶段编译跑通再进下一步）
 
@@ -14,7 +15,7 @@
 
 | 阶段 | 内容 | 状态 | 日期 | 备注 |
 |-----|------|:---:|------|------|
-| 0 | 环境搭建 | ☐ | | |
+| 0 | 环境搭建 | ☑ | 2026-09-04 | WSL2+CMake+CLion+git 首次提交 |
 | 1 | 文件 I/O 系统调用 | ☐ | | |
 | 2 | 进程/线程/同步封装（lock/） | ☐ | | |
 | 3 | TCP echo server/client | ☐ | | |
@@ -29,17 +30,20 @@
 
 ## 知识点笔记（按阶段）
 
-<!-- 示例格式，完成阶段后替换/追加：
-### 阶段 5：epoll
-- LT vs ET：ET 必须循环读到 EAGAIN，否则丢数据
-- 踩坑：bind 后 "Address already in use" → setsockopt(SO_REUSEADDR)
--->
+### 阶段 0：环境搭建
+- WSL2 + Ubuntu（装在 D:\Ubuntu），默认用户 lu_yunhao；g++ 15.2 / cmake 4.2.3 / git 2.53 / gdb 17.1
+- 踩坑1：`wsl --install` 报 `Error 14098`（组件存储损坏）→ `DISM /Online /Cleanup-Image /RestoreHealth` → `sfc /scannow` → 重启 → 重新 `Enable-Feature VirtualMachinePlatform`
+- 踩坑2：CLion WSL 工具链报「cmake 错误127 / 调试器没找到」→ 是 WSL 里没装 cmake 和 gdb，`sudo apt install cmake gdb`
+- 踩坑3：gdb 卡在 debuginfod 联网 → `set debuginfod enabled off`（写入 `~/.gdbinit`）
+- 构建：CLion + CMake + WSL 工具链；CMakeLists 加了 `-Wall`；编译产物是 Linux ELF
+- git：init → add → commit 跑通（root-commit）；身份用注册 GitHub 的 Gmail 邮箱显式设置（GitHub 按邮箱关联账号）；SSH 密钥配通并已推送 GitHub
 
 ## 决策记录
 
 - 2026-09：范围定为「核心版」，砍掉 MySQL/注册登录，先跑通网络与并发主线
 - 2026-09：阶段顺序按学习曲线重排（先 socket 再并发），而非原版源码目录顺序
 - 2026-09-01：构建工具用 CMake（CLion 原生支持），替代原版的 Makefile
+- 2026-09-04：git 提交身份用注册 GitHub 的 Gmail 邮箱（GitHub 按邮箱归属提交），配 SSH 推送
 
 ## 关键命令备忘
 

@@ -77,7 +77,7 @@ tinywebserver/
 - [x] g++ 编译四步：预处理 → 编译 → 汇编 → 链接；`g++ -o main main.cpp`
 - [x] 常用编译选项：`-std=c++11`（标准）、`-Wall`（警告）、`-g`（调试符号）、`-O2`（优化）
 - [x] CMake 基础：`CMakeLists.txt` 最小结构（`cmake_minimum_required / project / add_executable`）
-- [ ] git 基础：`init / add / commit / log / status / diff`
+- [x] git 基础：`init / add / commit / log / status / diff`
 - [x] gdb 基础：`break` 断点、`run`、`next` 单步、`print` 看变量（后续调试常用）
 
 **要写的代码：**

@@ -1,0 +1,15 @@
+# 构建产物
+cmake-build-debug/
+build/
+*.o
+*.exe
+
+# 练习用的临时可执行文件（项目根目录下）
+gdb_demo
+
+# IDE / 工具配置
+.idea/
+.sidebar-mimocode/
+
+# Obsidian 库配置（想同步笔记设置的话可删掉这行）
+.obsidian/

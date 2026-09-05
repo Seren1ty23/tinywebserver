@@ -31,3 +31,12 @@
 - 推送本地仓库到 GitHub 远程（分支 `main`）。
 
 **阶段 0（环境搭建）正式完成 ✅**
+
+## 2026-09-05 · 阶段 1：文件 I/O 系统调用
+
+- 学习文件描述符 fd（0/1/2 + open 返回 ≥3）、五个系统调用（open/read/write/close/lseek）、read 三种返回值、errno/perror。
+- 写 `test/io_demo.cpp`（简化版 cat）：循环 `read` 到 EOF + 处理 `write` 部分写入。
+- 命令行编译运行通过：`./io_demo PLAN.md` 正确打印全文。
+- **踩坑修复**：把 `io_demo.cpp` 和 `main.cpp` 塞进同一个 CMake target → 链接报 `multiple definition of 'main'`；拆成两个 `add_executable` 解决。
+
+**阶段 1（文件 I/O）正式完成 ✅**

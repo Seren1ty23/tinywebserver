@@ -6,6 +6,7 @@ build/
 
 # 练习用的临时可执行文件（项目根目录下）
 gdb_demo
+io_demo
 
 # IDE / 工具配置
 .idea/

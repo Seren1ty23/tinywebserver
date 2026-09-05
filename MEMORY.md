@@ -16,7 +16,7 @@
 | 阶段 | 内容 | 状态 | 日期 | 备注 |
 |-----|------|:---:|------|------|
 | 0 | 环境搭建 | ☑ | 2026-09-04 | WSL2+CMake+CLion+git 首次提交 |
-| 1 | 文件 I/O 系统调用 | ☐ | | |
+| 1 | 文件 I/O 系统调用 | ☑ | 2026-09-05 | io_demo（简化版 cat）跑通 |
 | 2 | 进程/线程/同步封装（lock/） | ☐ | | |
 | 3 | TCP echo server/client | ☐ | | |
 | 4 | 单线程阻塞 HTTP 静态服务器 | ☐ | | |
@@ -37,6 +37,12 @@
 - 踩坑3：gdb 卡在 debuginfod 联网 → `set debuginfod enabled off`（写入 `~/.gdbinit`）
 - 构建：CLion + CMake + WSL 工具链；CMakeLists 加了 `-Wall`；编译产物是 Linux ELF
 - git：init → add → commit 跑通（root-commit）；身份用注册 GitHub 的 Gmail 邮箱显式设置（GitHub 按邮箱关联账号）；SSH 密钥配通并已推送 GitHub
+
+### 阶段 1：文件 I/O 系统调用
+- 核心：文件描述符 fd（0=stdin 1=stdout 2=stderr，open 返回 ≥3）；「一切皆文件」
+- open/read/write/close/lseek 五个系统调用；read 三返回值（>0 读到 / =0 EOF / <0 出错看 errno）
+- 踩坑：CMake 一个 target 只能有一个 main()，两个含 main 的 .cpp 塞同一 add_executable 会「multiple definition of main」→ 一个可执行文件 = 一个 add_executable
+- 产出：test/io_demo.cpp（简化版 cat，循环 read 到 EOF + 处理部分写入）
 
 ## 决策记录
 

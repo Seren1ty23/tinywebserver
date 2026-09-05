@@ -100,11 +100,11 @@ git init && git add . && git commit -m "stage0: env setup"
 **目标：** 理解「一切皆文件」与文件描述符，能用系统调用读写文件。
 
 **前置知识点学习清单：**
-- [ ] 文件描述符 fd（0/1/2 = stdin/stdout/stderr，`open` 返回新 fd）
-- [ ] `open / read / write / close / lseek` 各参数与返回值
-- [ ] `errno` 与错误处理：`perror()` / `strerror(errno)`
-- [ ] 用户态缓冲区 vs 内核态缓冲区；`read` 返回值 < 0 / = 0（EOF） / > 0 三种情况
-- [ ] `man 2 open` 查看手册的方法
+- [x] 文件描述符 fd（0/1/2 = stdin/stdout/stderr，`open` 返回新 fd）
+- [x] `open / read / write / close / lseek` 各参数与返回值
+- [x] `errno` 与错误处理：`perror()` / `strerror(errno)`
+- [x] 用户态缓冲区 vs 内核态缓冲区；`read` 返回值 < 0 / = 0（EOF） / > 0 三种情况
+- [x] `man 2 open` 查看手册的方法
 
 **要写的代码：**
 - `test/io_demo.cpp`：实现一个简化版 `cat`——`open` 文件，循环 `read` 到缓冲区，`write` 到 stdout

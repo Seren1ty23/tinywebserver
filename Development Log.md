@@ -40,3 +40,12 @@
 - **踩坑修复**：把 `io_demo.cpp` 和 `main.cpp` 塞进同一个 CMake target → 链接报 `multiple definition of 'main'`；拆成两个 `add_executable` 解决。
 
 **阶段 1（文件 I/O）正式完成 ✅**
+
+## 2026-09-12 · 阶段 2：进程/线程与同步封装（lock/）
+
+- 学习进程 vs 线程、竞态条件、互斥锁 / 条件变量 / 信号量三大同步原语、RAII 封装。
+- 写 `lock/locker.h`（三个 RAII 封装类：sem / locker / cond）+ `test/lock_test.cpp`（双线程各加 100 万次）。
+- 编译运行通过（加 `-pthread`）：最终 `count = 2000000`，无竞态。
+- 代码统一用 `nullptr`（替代 NULL）和 `std::cout`（替代 printf）。
+
+**阶段 2（进程/线程与同步封装）正式完成 ✅**

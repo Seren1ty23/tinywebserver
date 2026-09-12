@@ -17,7 +17,7 @@
 |-----|------|:---:|------|------|
 | 0 | 环境搭建 | ☑ | 2026-09-04 | WSL2+CMake+CLion+git 首次提交 |
 | 1 | 文件 I/O 系统调用 | ☑ | 2026-09-05 | io_demo（简化版 cat）跑通 |
-| 2 | 进程/线程/同步封装（lock/） | ☐ | | |
+| 2 | 进程/线程/同步封装（lock/） | ☑ | 2026-09-12 | lock/locker.h + lock_test 跑通（200 万） |
 | 3 | TCP echo server/client | ☐ | | |
 | 4 | 单线程阻塞 HTTP 静态服务器 | ☐ | | |
 | 5 | 非阻塞 + epoll 多路复用 | ☐ | | |
@@ -43,6 +43,12 @@
 - open/read/write/close/lseek 五个系统调用；read 三返回值（>0 读到 / =0 EOF / <0 出错看 errno）
 - 踩坑：CMake 一个 target 只能有一个 main()，两个含 main 的 .cpp 塞同一 add_executable 会「multiple definition of main」→ 一个可执行文件 = 一个 add_executable
 - 产出：test/io_demo.cpp（简化版 cat，循环 read 到 EOF + 处理部分写入）
+
+### 阶段 2：进程/线程与同步封装（lock/）
+- 核心：进程（独立内存）vs 线程（共享内存）；竞态条件（多线程读写共享数据、结果随执行顺序变）
+- 三个原语分工：互斥锁（保证**互斥**）/ 条件变量（保证**同步**，必须配锁）/ 信号量（计数控并发）
+- RAII 封装：构造 init、析构 destroy；pthread 编译要加 `-pthread`（CMake 用 `find_package(Threads)`）
+- 产出：`lock/locker.h`（sem/locker/cond 三个 RAII 封装类）+ `test/lock_test.cpp`（双线程各加 100 万次 = 200 万）
 
 ## 决策记录
 

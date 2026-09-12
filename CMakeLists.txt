@@ -9,3 +9,7 @@ add_executable(tinywebserver
 
 add_executable(io_demo
         test/io_demo.cpp)
+
+add_executable(lock_test
+        test/lock_test.cpp
+        lock/locker.h)

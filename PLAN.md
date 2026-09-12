@@ -128,12 +128,12 @@ g++ -std=c++11 -o io_demo test/io_demo.cpp
 **目标：** 掌握并发基础，实现原版 `lock/` 目录的线程同步封装类。
 
 **前置知识点学习清单：**
-- [ ] 进程 vs 线程；`fork / wait`；`pthread_create / pthread_join`
-- [ ] 竞态条件、临界区、死锁
-- [ ] 互斥锁：`pthread_mutex_init / lock / unlock`
-- [ ] 条件变量：`pthread_cond_init / wait / signal / broadcast`（`wait` 必须配合锁）
-- [ ] 信号量：`sem_init / sem_wait / sem_post`
-- [ ] RAII 思想：构造时加锁、析构时解锁
+- [x] 进程 vs 线程；`fork / wait`；`pthread_create / pthread_join`
+- [x] 竞态条件、临界区、死锁
+- [x] 互斥锁：`pthread_mutex_init / lock / unlock`
+- [x] 条件变量：`pthread_cond_init / wait / signal / broadcast`（`wait` 必须配合锁）
+- [x] 信号量：`sem_init / sem_wait / sem_post`
+- [x] RAII 思想：构造时加锁、析构时解锁
 
 **要写的代码：**
 - `lock/locker.h`：三个 RAII 封装类
